@@ -1,6 +1,12 @@
 Algoritmo de Ordenação
 
-InsertioSort= Ele ordena com uma divisão em dois grupos( parte ordenada e não ordenada), pega o próximo valor e insere na parte ordenada
+InsertioSort= Ele ordena com uma divisão em dois grupos( parte ordenada e não ordenada),
+pega o próximo valor e insere na parte ordenada
 
-SELECTION SORT
+SELECTION SORT=
+Encontra o menor valor em uma porção desordenada e coloca no início desta porção desordenada.
+O processo continua até que todos os elementos estejam ordenados
+Todos são desordenados
+
+Tenho 4 macro-iterações
 
