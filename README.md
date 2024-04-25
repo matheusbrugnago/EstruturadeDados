@@ -1,2 +1,2 @@
 # EstruturadeDados
-Repositório criado para estudo de estrutura de dados
+Material para Estrutura de Dados
