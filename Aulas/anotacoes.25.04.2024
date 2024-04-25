@@ -1,0 +1,6 @@
+Algoritmo de Ordenação
+
+InsertioSort= Ele ordena com uma divisão em dois grupos( parte ordenada e não ordenada), pega o próximo valor e insere na parte ordenada
+
+SELECTION SORT
+
