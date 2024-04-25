@@ -8,5 +8,29 @@ Encontra o menor valor em uma porção desordenada e coloca no início desta por
 O processo continua até que todos os elementos estejam ordenados
 Todos são desordenados
 
-Tenho 4 macro-iterações
+* Tenho 4 macro-iterações no primeiro For; Se eu tenho uma coleção de 5 elementos, e eu fiz 4 mudanças, não há o porquê mudar o último
+* Tem que Salvar o índice de menor valor a partir do vetor[ i ]
+* Faça a análise se o vetor[indice] é menor que o MenorValor
+* Faça a troca de valores caso aconteça
+
+public static void selectionSort(int[] vetor){
+        for (int i = 0; i < (vetor.length-1); i++) {
+            int MenorValor=vetor[i];
+            for (int j = i; j < (vetor.length); j++) {
+                if (vetor[j]<MenorValor){
+                    MenorValor=vetor[j];
+                    int temp = vetor[i];
+                    vetor[i] = vetor[j];
+                    vetor[j] = temp;
+                }
+            }
+        }
+    }
+
+* Algoritmo Mais Simples de ser implementado
+* Complexidade Quadrática( O ^2)
+* Não é estável. Isto é, dependendo das trocas, ele não mantém a ordem relativa dos valores iguais:
+  Exemplo: um valor 4 e 4, devem respeitar a ordem que estão nu vetor original
+* Trocas são feitas no mesmo espaço da memória( vetor original )
+---------------------------------------------------------------------------------
 
