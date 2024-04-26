@@ -2,6 +2,7 @@ Algoritmo de Ordenação
 
 InsertioSort= Ele ordena com uma divisão em dois grupos( parte ordenada e não ordenada),
 pega o próximo valor e insere na parte ordenada
+É Estável
 
 SELECTION SORT=
 Encontra o menor valor em uma porção desordenada e coloca no início desta porção desordenada.
@@ -33,4 +34,42 @@ public static void selectionSort(int[] vetor){
   Exemplo: um valor 4 e 4, devem respeitar a ordem que estão nu vetor original
 * Trocas são feitas no mesmo espaço da memória( vetor original )
 ---------------------------------------------------------------------------------
+QUICK SORT=
+Cada passada existe a escolha de um pivô( elemento especial ), escolha fixa na posição 0, garantir que o pivô esteja na posição correta
+Significa que todos os elementos antes do pivô sejam menores que ele, e depois dele todos os elementos sejam maiores.
 
+public static void quickSort(int[] vetor){
+        int n = vetor.length;
+        quickSortRec(vetor,0,n-1); //avalie esse vetor da posição 0 até n-1
+    }
+    private static int particionar(int[] vetor,int a,int b){
+        int pivo=vetor[a]; //pivo fixado na posição 0
+        while (a<b){
+            while(vetor[a]<pivo){
+                a=a+1;
+            }
+            while(vetor[b]>pivo){
+                b=b-1;
+            }
+            int temp=vetor[a];
+            vetor[a]=vetor[b];
+            vetor[b]=temp;
+        }
+        return a;
+    }
+    private static void quickSortRec(int[] vetor,int a,int b){
+        if(a>=b){
+            return; //condição de parada
+        }
+        int pivo = particionar(vetor,a,b); //descobrir a posição certa de um pivô //divisão e conquista
+        quickSortRec(vetor,a,pivo-1); //esquerda do pivô
+        quickSortRec(vetor, pivo+1, b); //direita do pivô
+    }
+
+*Algoritmo de Ordenação de Comparação( particionamento )
+*Estratégia de Divisão e Conquista
+*O QS é um algoritmo não estável( não preserva a ordem dos elementos com valores iguais )
+*Escolha do pivô pode ser aleatória
+*Complexidade de Ordem Quadrática( O^2)
+*Utilizado pelo Java
+*MergeSort é bem melhor que o QuickSort, mas usa mais espaço de memória
