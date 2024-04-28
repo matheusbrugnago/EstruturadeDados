@@ -1,0 +1,94 @@
+ORDENAÇÃO BUBBLE SORT:
+A ordenação Bolha é feita quando dois elementos estão fora de ordem,
+troque-os de posição até que o i-nésimo elemento de maior valor do vetor
+seja levado para as posições finais do vetor( uma bolha subindo )
+
+*Após ele ser levado para a última posição, a comparação com a última posição
+não faz sentido, então diminuimos o "vetor de comparação" para trocarmos os 
+valores dois a dois
+
+BUBBLE SORT V1:
+
+public static void BubbleSort(int[] vetor){
+	for( int i =v.lenght -1; i>0;i--){  // Ele passa de trás para frente
+		for( int j=0; j < i ; j++){ // A comparação passa de frente para trás
+			if (vetor[j] > vetor[j+1]){ //Se o número for maior  que o outro, deve-se trocar
+				int temp = vetor[j]; 
+				vetor[j] = vetor[j+1];
+				vetor[j+1] = temp;
+		}
+	}
+}
+
+BUBBLE SORT V2:
+
+* Foi incrementado uma verificação para analisar se este algoritmo
+precisa ser trocado, se não, deve-se sair do loop
+
+public static void BubbleSort(int[] vetor){
+	for( int i =v.lenght -1; i>0;i--){
+		boolean troca = false; 
+		for( int j=0; j < i ; j++){
+			if (vetor[j] > vetor[j+1]){
+				int temp = vetor[j];
+				vetor[j] = vetor[j+1];
+				vetor[j+1] = temp;
+				troca = true;
+				}
+		}
+		if(!troca) return; // A validação é que se a variavel boolean não mudar, deve se terminar o método
+	}
+}
+
+BUBBLE SORT RECURSIVO:
+
+public static void BubbleSortRecursivo(int[] vetor ){
+			bubbleSortRecAux(vetor.length, vetor);  //método para puxar outro método(facilita para o programador)
+}
+private static void bubbleSortRecAux( int n, in[] vetor){
+			boolean troca = false;
+			for ( int j = 0; j< (n-1) ; j++){
+					if( vetor[j] > vetor[j+1]){
+						int temp = vetor[j];
+						vetor[j] = vetor[j+1]; //método de troca sendo feito
+						vetor[j+1] = temp;
+						troca = true;
+						}
+			}
+			if (troca) bubbleSortRecAux( n-1, vetor); //volta o método recursivo
+
+Análise de Complexidade:
+* Esforço computacional = Número de Comparações
+* Esforço Computacional = Número Máximo de Trocas
+  *Primeira passada n-1 comparações
+  *Segunda passada n-2 comparações
+  *Terceira passada n-3 comparações
+*Complexidade Quadrática( O^2)
+
+---------------------------------------------------------------------------
+
+ORDENAÇÃO INSERTION-SORT
+
+Dividir o vetor em duas partes( ordenada e não ordenada) e,
+a partir da iteração pelos seus elementos,os elementos da
+parte não ordenada são colocados na parte ordenada
+
+Ao inserir elementos na parte ordenada, o elemento é inserido 
+na sua posição correta, isto é, valores à sua esquerda são menores do que ele 
+
+public static void insertionSort( int[] vetor ){
+  int eleito, j;
+  for ( int i = 1; i< vetor.lenght; i++){
+    eleito = vetor[i];
+    j= i - 1;
+    while ( ( j>=0) && (eleito<vetor[j])) {
+      vetor[j+1] = vetor[j];
+      j--;
+    }
+    vetor[j+1] = eleito;
+
+- O primeiro Loop se refere a parte não ordenada;
+- O eleito se refere ao vetor[i] = Numero que queremos inserir
+- O j é o número da parte ordenada
+- O while é para ter enquanto o j é maior que 0 e o eleito é menor que o número antecessor: Daí precisa alterar
+- Faz alteração do valores
