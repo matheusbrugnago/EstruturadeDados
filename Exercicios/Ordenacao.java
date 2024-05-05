@@ -150,6 +150,31 @@ public class Ordenacao {
         }
     }
     public static void shellSort(int[] vetor){
+        int n = array.length;
 
+            // Define a lacuna inicial
+        int gap = n / 2;
+
+            // Continua até que a lacuna seja 0
+        while (gap > 0) {
+                // Percorre o array com a lacuna atual
+            for (int i = gap; i < n; i++) {
+                    // Guarda o valor atual e a posição
+                int temp = array[i];
+                int j = i;
+
+                    // Move os elementos para frente até encontrar a posição correta para temp
+                while (j >= gap && array[j - gap] > temp) {
+                    array[j] = array[j - gap];
+                    j -= gap;
+                }
+
+                    // Insere temp na posição correta
+                array[j] = temp;
+            }
+
+                // Reduz a lacuna para a próxima iteração
+            gap /= 2;
+        }
     }
 }
