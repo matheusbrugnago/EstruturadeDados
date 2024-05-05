@@ -1,0 +1,63 @@
+ORDENAÇÃO POR MERGESORT:
+
+* Abordagem de divisão e conquista para ordenar
+* Dividir o problema em um determinado número de subproblemas( fáceis de se resolver )
+* Conquistar os subproblemas, resolvendo-os recursivamente
+* Combinar as soluções dadas aos subproblemas
+
+Implementação por ALGORITMO RECURSIVO:
+
+ public static void mergeSort(int[] vetor){  //Recebe do Programador
+        int n = vetor.length;
+        mergeSortRec(vetor,0,n-1,0); //Envia um recursivo
+    }
+    private static void mergeSortRec(int[] vetor,int ini,int fim,int nivelRec){
+        if(fim<=ini){
+            return;  // condicao de parada
+        }
+        int meio = (ini+fim)/2;  //calculando o meio do vetor
+
+        System.out.print("\n"+nivelRec+"= { "+ini+" | "+meio+" | "+fim+" }");
+
+        //chamadas recursivas para dividir vetor
+        mergeSortRec(vetor,ini,meio,nivelRec+1); //esq
+        mergeSortRec(vetor,meio+1,fim,nivelRec+1); //dir
+
+        // conquistar e juntar partes
+        merge(vetor,ini,meio,fim);
+    }
+    private static void merge(int[] vetor,int ini,int meio,int fim){
+        int tam1= meio - ini +1;
+        int tam2= fim - meio;
+        int[] arrayL = new int[tam1];
+        int[] arrayR = new int[tam2];  //Memória temporária
+
+        for(int i=0;i<tam1;i++){
+            arrayL[i]=vetor[ini+i];
+        }
+        for (int i=0;i<tam2;i++){
+            arrayR[i] = vetor[(meio+1)+i];
+        }
+        int i=0;int j=0;
+        for (int k=ini;k<=(fim+1);k++){
+            if(i< arrayL.length && j< arrayR.length){
+                if(arrayL[i]<arrayR[j]){
+                    vetor[k]=arrayL[i++];
+                }else{
+                    vetor[k]=arrayR[j++];
+                }
+            }else if(i< arrayL.length){
+                vetor[k]=arrayL[i++];
+            } else if (j<arrayR.length) {
+                vetor[k]= arrayR[j++];
+            }
+        }
+    }
+
+    ----------------------------------------------------------------------
+    * Algoritmo de ordenação por comparação do tipo divisão-conquista
+    * Adoção de Recursividade( atenção para alto consumo de memória e tempo de execução)
+    * Algoritmo Estável
+    * Ordem Quadrática : O( n log n )
+    ----------------------------------------------------------------------
+    
