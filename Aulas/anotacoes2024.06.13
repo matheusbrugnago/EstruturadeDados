@@ -1,0 +1,181 @@
+ArrayList = ListaComArray
+atributos:
+array : Integer[]
+counter : integer
+initialCapacity: integer
+
+Caracteristicas: É redimensionável, cada vez que ela fica cheia é aumentado em 10 posições
+
+public class ListaComArray {
+    private Integer[] array; //vetor bruto
+    private boolean resizable; //se é redimensionável
+    private int initialCapacity; //capacidade inicial do array -> initialCapacity != counter
+    private int counter; //contador de elementos
+    private final static int x=10;
+
+    public ListaComArray(){
+        this(10); //puxa uma lista de tamanho 10 que já redimensionável
+    }
+    public ListaComArray(int initialCapacity){
+        this(initialCapacity,true); //puxa uma lista que já redimensionavel
+    }
+    public ListaComArray(int initialCapacity, boolean resizable){
+        this.initialCapacity=initialCapacity;
+        this.array= new Integer[initialCapacity];  //cria o desenho do vetor na memória
+        this.resizable=resizable; //permite dizer se ele é redimensionável ou não
+        this.counter=0; //é a contagem de quantos itens possuem um vetor
+    }
+    public boolean add(Integer elemento){ //adição de elemento
+        if(counter== array.length){ //verifica se a contagem de elementos já é igual ao tamanho do array
+            if(resizable){
+                resizeArrayList();
+            }else{
+                return false;
+            }
+        }
+        array[counter]= elemento;
+        counter+=1; //quando eu faço um add, o counter deve ser adicionado
+        return true;
+    }
+    public boolean add(int index,Integer elemento){
+        if(index<0 || index> counter){
+            return false;
+        }
+        if(counter == array.length){
+            if(resizable){
+                resizeArrayList(); //aumenta o array
+            }else{
+                return false;
+            }
+        }
+        for (int i = counter; i >index ; i--) {
+            array[i]=array[i-1]; //quebra o vetor, joga os valores para suas posições a frente
+        }
+        array[index]= elemento; //acrescenta nesse índice o valor do elemento
+        counter+=1; //quando eu faço um add, o counter deve ser adicionado
+        return true;
+    }
+    private void resizeArrayList(){ //prvd
+        Integer novo[]= new Integer[array.length+x]; //cria um array novo para a memória
+        System.arraycopy(array,0,novo,0,counter);
+        //for (int i = 0; i < counter; i++) {
+            //novo[i]=array[i]; //joga todos os valores do array para o novo. O que não tiver fica como Null
+        //}
+        array = novo; //atualiza o array para ser igual ao novo;
+    }
+    public Integer remove(int indice){
+        if(indice<array[0] || indice>array[array.length-1]){
+            return null;
+        }
+        for (int posicao:array) {
+            if(array[posicao]==array[indice]){
+                for (int i = indice; i < array.length - 1; i++) {
+                    array[i] = array[i + 1];
+                }
+                counter--;
+            }
+        }
+        return -1;
+    }
+
+    public boolean removeFirst(Integer elemento){
+        for (Integer element:array) {
+            if(elemento==array[element]){
+                for (int i = 0; i < array.length - 1; i++) {
+                    array[i] = array[i + 1];
+                }
+                counter--;
+                return true;
+            }
+        }
+        return false;
+    }
+    public void clear(){
+        if(resizable){
+            array= new Integer[initialCapacity];  //vai sobrescrever o array para uma capacidade inicial
+        }
+        counter=0;
+    }
+    public int size(){
+        return counter; //retorna quantos elementos têm
+    }
+    public boolean isEmpty(){ //se está vazio
+        if(counter==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public boolean isFull(){
+        if(resizable==true){ //resultado se ele é redimensionável
+            return false;
+        }else{
+            return (counter==array.length); //resultado da operação lógica, aonde o contador é igual ao tamanho
+        }
+    }
+    public Integer get(int posicao){
+        if(posicao<0 || posicao>=counter){
+            return null;
+        }
+        return array[posicao];
+    }
+    public Integer set(int posicao, Integer elemento){
+        if(posicao<array[0] || posicao>array[array.length-1]){
+            return null;
+        }
+        int antigo = array[posicao];
+        array[posicao]= elemento;
+        return antigo;
+    }
+    public boolean contains(Integer element ){
+        for (int i = 0; i < counter; i++) {
+            if(element==array[i]){
+                return true;
+            }
+        }
+        return false;
+    }
+    public int indexOf( Integer element){ //2     3,4,2,5,2  -> indice 2
+        for (int i = 0; i < counter; i++) {
+            if(element==array[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public int lastIndexOf( Integer element){
+        for (int i = counter-1; i >= 0 ; i--) {
+            if(element==array[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public Integer[] toArray(){
+        Integer[] newarray= new Integer[counter];
+        for (int i = 0; i < counter; i++) {
+            newarray[i]= array[i];
+        }
+        return newarray;
+    }
+    public String toString(){
+        String myarry1="[";
+        for (int i = 0; i < counter; i++) {
+            if( i !=( counter-1)){
+                myarry1 +=array[i]+", "; //verifica se
+            }else{
+                myarry1 += array[i]+" ]";
+            }
+        }
+        String myarry2="["; // para ver como está sendo manipuado na memória
+        for (int i = 0; i < array.length; i++) {
+            if( i !=( array.length-1)){
+                myarry2 +=array[i]+", "; //concatenação da string
+            }else{
+                myarry2 += array[i]+" ]";
+            }
+        }
+        //return "Error"+ myarry1 + "\n"+ myarry2; //compara os dois vetores
+        return myarry1;
+    }
+}
