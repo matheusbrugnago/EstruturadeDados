@@ -1,10 +1,3 @@
-ArrayList = ListaComArray
-atributos:
-array : Integer[]
-counter : integer
-initialCapacity: integer
-
-Caracteristicas: É redimensionável, cada vez que ela fica cheia é aumentado em 10 posições
 
 public class ListaComArray {
     private Integer[] array; //vetor bruto
@@ -59,17 +52,17 @@ public class ListaComArray {
         Integer novo[]= new Integer[array.length+x]; //cria um array novo para a memória
         System.arraycopy(array,0,novo,0,counter);
         //for (int i = 0; i < counter; i++) {
-            //novo[i]=array[i]; //joga todos os valores do array para o novo. O que não tiver fica como Null
+        //novo[i]=array[i]; //joga todos os valores do array para o novo. O que não tiver fica como Null
         //}
         array = novo; //atualiza o array para ser igual ao novo;
     }
     public Integer remove(int indice){
-        if(indice<array[0] || indice>array[array.length-1]){
+        if(indice<0 || indice>counter){
             return null;
         }
         for (int posicao:array) {
             if(array[posicao]==array[indice]){
-                for (int i = indice; i < array.length - 1; i++) {
+                for (int i = indice; i < counter - 1; i++) {
                     array[i] = array[i + 1];
                 }
                 counter--;
@@ -79,10 +72,10 @@ public class ListaComArray {
     }
 
     public boolean removeFirst(Integer elemento){
-        for (Integer element:array) {
-            if(elemento==array[element]){
-                for (int i = 0; i < array.length - 1; i++) {
-                    array[i] = array[i + 1];
+        for (int i = 0; i < counter ; i++) {
+            if(elemento==array[i]){
+                for (int j=i; i < counter - 1; j++) {
+                    array[j] = array[j + 1];
                 }
                 counter--;
                 return true;
